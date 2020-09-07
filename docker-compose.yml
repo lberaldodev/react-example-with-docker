@@ -1,0 +1,22 @@
+version: '3'
+
+services: 
+    app:
+        #Onde o dockerfile está (no mesmo diretorio)
+        build: .
+        command: npm start
+        ports:
+            - 3000:3000
+        environment: 
+            PORT: 3000
+        #Fix erro pra startar o react.
+        stdin_open: true
+        volumes: 
+            # Tudo que estiver no diretorio atual, exceto a node_modules,
+            # Sera copiado para dentro do container em /src.
+            - ./:/src/
+            # Volume dedicado apenas para libs.
+            - nodemodules:/src/node_modules
+volumes: 
+    # Inicie como default o volume nodemodules.
+    nodemodules: {}
