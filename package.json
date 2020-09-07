@@ -11,6 +11,8 @@
     "react-scripts": "3.4.3"
   },
   "scripts": {
+    "container_build": "docker-compose up -d --build",
+    "container_down": "docker-compose down",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
