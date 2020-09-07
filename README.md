@@ -1,68 +1,68 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Info.
 
-## Available Scripts
+Projeto iniciado utilizando Create React App.
 
-In the project directory, you can run:
+Há 2 arquivos docker:
+
+- Dockerfile: Inclui o script docker para buildar a imagem do nodejs e executar o ReactJS.
+Estamos trabalhando com 2 volumes, onde 1 volume fica responsavel pelo códigofonte e outro responsavel apenas pelas libs. Assim, nao copiamos a node_modules pra dentro.
+
+- docker-compose.yml: Executa o dockerfile como script de build.
+Estamos trabalhando com 2 volumes, onde 1 volume fica responsavel pelo códigofonte e outro responsavel apenas pelas libs. Assim, nao copiamos a node_modules pra dentro.
+
+## Docker Scripts 
+Criar e executar o container utilizando a imagem node alpine e executar em background.
+```sh 
+docker-compose up -d --build
+```
+
+Listar todos os containers em execução.
+```sh 
+docker ps -a
+```
+
+Após criar o container, iniciar ele.
+```sh 
+docker start <id>
+```
+
+Remover todos containers em execução.
+```sh
+docker-compose down
+```
+
+## Dockerfile Scripts
+
+Criar um volume chamado nodemodules, que será utilizado apenas para libs.
+```sh 
+docker volume create --name nodemodules
+```
+
+Criar uma imagem docker chamada app.
+```sh
+docker build -t app
+```
+
+Executar a imagem criada anteriormente (app).
+```sh 
+docker run --name app -it -p 3000:3000 -v `pwd`:/src -v nodemodules:/src/node_modules app
+```
+- --name: seta a tag da imagem para app.
+
+- -p 3000:3000: exporta a porta 3000 de dentro do container para acesso externo também na 3000.
+
+- -v `pwd`:/src: cria um volume para que tudo que tiver dentro do diretorio do projeto vai ser refletido dentro do container na pasta src.
+
+- -v nodemodules:/src/node_modules: define um volume exclusivo para libs.
 
 ### `yarn start`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Inicia o projeto React.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Executa os testes.
 
 ### `yarn build`
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- Gera o build de producao.
