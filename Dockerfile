@@ -15,4 +15,4 @@ RUN npm i --silent
 ADD . /src
 
 # COMANDO PARA EXECUTAR A APP (Nāo é necessario utilizando docker-compose).
-# CMD ["npm", "start"]
+CMD ["npm", "run", "start_dev"]
