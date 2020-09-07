@@ -55,6 +55,14 @@ docker run --name app -it -p 3000:3000 -v `pwd`:/src -v nodemodules:/src/node_mo
 
 - -v nodemodules:/src/node_modules: define um volume exclusivo para libs.
 
+### `npm run container_build`
+
+- Cria o container rodando o script do docker-compose.
+
+### `npm run container_down`
+
+- Deleta o container
+
 ### `yarn start`
 
 - Inicia o projeto React.
